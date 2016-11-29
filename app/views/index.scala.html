@@ -1,0 +1,11 @@
+@(users: List[String])
+
+@main("All Users") { } {
+  <p>
+<ul>
+  @for(name <- users) {
+    <li>@name</li>
+  }
+</ul>
+  </p>
+}

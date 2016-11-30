@@ -8,9 +8,10 @@ import java.util.ArrayList;
 public class VendrDB {
 
     public static ArrayList<String> getAllUserNames() throws SQLException {
-        return getAllNames("users");
+    //    return getAllNames("users");
+        return queryDatabase("SELECT * FROM users", 1);
     }
-
+/*
     public static ArrayList<String> getAllNames(String table) throws SQLException {
         assert table.equals("users");
         Connection connection = null;
@@ -37,4 +38,37 @@ public class VendrDB {
         }
         return names;
     }
+*/
+    public static ArrayList<String> queryDatabase(String query, int idx) throws SQLException {
+        Connection connection = null;
+        ArrayList<String> ret = new ArrayList<String>();
+
+        try {
+            connection = DB.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement
+                    .executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString(idx);
+                ret.add(name);
+            }
+            rs.close();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                }
+                catch (Exception e) {
+                }
+            }
+        }
+        return ret;
+    }
+
+   /* public static int getNumLikesUserDate() throws SQLException {
+
+    } */
+
+
 }

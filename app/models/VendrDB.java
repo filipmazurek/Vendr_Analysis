@@ -11,7 +11,13 @@ public class VendrDB {
     //    return getAllNames("users");
         return queryDatabase("SELECT * FROM users", 1);
     }
-/*
+
+    public static Integer getNumLikesUserDate(String uid, String startDate, String endDate) throws SQLException {
+        return Integer.parseInt(queryDatabase("SELECT COUNT(*) FROM user_like_ad WHERE user_id=" + stringifyName(uid) +" AND did_like IS TRUE AND time_of_like <= " + stringifyName(endDate) + "AND time_of_like > " +stringifyName(startDate)));
+    }
+
+
+    /*
     public static ArrayList<String> getAllNames(String table) throws SQLException {
         assert table.equals("users");
         Connection connection = null;
@@ -66,9 +72,34 @@ public class VendrDB {
         return ret;
     }
 
-   /* public static int getNumLikesUserDate() throws SQLException {
+    public static String queryDatabase(String query) throws SQLException {
+        Connection connection = null;
+       String ret = "";
 
-    } */
+        try {
+            connection = DB.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement
+                    .executeQuery(query);
+            while (rs.next()) {
+                ret = rs.toString();
+            }
+            rs.close();
+            statement.close();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                }
+                catch (Exception e) {
+                }
+            }
+        }
+        return ret;
+    }
 
+    public static String stringifyName(String name){
+        return "'" + name + "'";
+    }
 
 }

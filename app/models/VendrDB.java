@@ -14,7 +14,7 @@ public class VendrDB {
     public static ArrayList<String> getAllNames(String table) throws SQLException {
         assert table.equals("users");
         Connection connection = null;
-        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<String>();
         try {
             connection = DB.getConnection();
             Statement statement = connection.createStatement();

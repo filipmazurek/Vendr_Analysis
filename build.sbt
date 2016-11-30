@@ -1,6 +1,4 @@
-import play.PlayScala
-
-name := """VendrAnalysis"""
+name := """beers"""
 
 version := "1.0-SNAPSHOT"
 

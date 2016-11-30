@@ -1,4 +1,4 @@
-name := """beers"""
+name := """Vendr_Analytics"""
 
 version := "1.0-SNAPSHOT"
 
